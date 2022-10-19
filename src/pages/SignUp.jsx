@@ -1,7 +1,11 @@
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { auth, db } from '../firebase';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -10,6 +14,7 @@ const SignUp = () => {
         email: "",
         password: ""
     });
+    // const navigate = useNavigate()
 
     const { name, email, password } = formData
     const onChange = (e) => {
@@ -18,7 +23,46 @@ const SignUp = () => {
             [e.target.id]: e.target.value
         }));
     }
+    const navigate = useNavigate();
 
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            updateProfile(auth.currentUser, {
+                displayName: name,
+            });
+            const user = userCredential.user;
+            const formDataCopy = { ...formData };
+            delete formDataCopy.password;
+            formDataCopy.timestamp = serverTimestamp();
+
+            await setDoc(doc(db, "users", user.uid), formDataCopy);
+            setFormData({
+                name: "",
+                email: "",
+                password: ""
+            });
+            toast.success("Sign up was successfuly");
+            navigate("/")
+        } catch (error) {
+            toast.error('Something went wrong with the registration!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+    }
     return (
         <section>
             <h1 className="text-3xl text-center mt-6 font-bold">Sign Up</h1>
@@ -27,11 +71,11 @@ const SignUp = () => {
                     <img src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7965.jpg?w=826&t=st=1666199611~exp=1666200211~hmac=682e6c3baefccdbaa994b52c665c80d0df2ad5123281de94a48e343ff4b552b4" alt="sign in" className="w-full rounded-2" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-                    <form>
-                        <input type="text" id="text" value={name} onChange={onChange} placeholder="Full name" className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out" />
-                        <input type="email" id="email" value={email} onChange={onChange} placeholder="Email address" className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out" />
+                    <form onSubmit={onSubmit}>
+                        <input type="text" id="name" value={name} onChange={onChange} placeholder="Full name" className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out" required />
+                        <input type="email" id="email" value={email} onChange={onChange} placeholder="Email address" className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out" required />
                         <div className='relative mb-6'>
-                            <input type={showPassword ? "text" : "password"} id="password" value={password} onChange={onChange} placeholder="Password" className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out" />
+                            <input type={showPassword ? "text" : "password"} id="password" value={password} onChange={onChange} placeholder="Password" className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out" required />
                             {
                                 showPassword ?
                                     (<FiEye className="absolute right-3 top-3 text-xl cursor-pointer" onClick={() => setShowPassword((prevState) => !prevState)} />) :
