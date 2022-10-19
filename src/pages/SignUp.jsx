@@ -24,7 +24,7 @@ const SignUp = () => {
             <h1 className="text-3xl text-center mt-6 font-bold">Sign Up</h1>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
-                    <img src="https://www.go.ooo/img/bg-img/Login.jpg" alt="sign in" className="w-full rounded-2" />
+                    <img src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7965.jpg?w=826&t=st=1666199611~exp=1666200211~hmac=682e6c3baefccdbaa994b52c665c80d0df2ad5123281de94a48e343ff4b552b4" alt="sign in" className="w-full rounded-2" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
                     <form>

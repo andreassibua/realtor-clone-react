@@ -23,7 +23,7 @@ const SignIn = () => {
             <h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
-                    <img src="https://www.go.ooo/img/bg-img/Login.jpg" alt="sign in" className="w-full rounded-2" />
+                    <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=826&t=st=1666199487~exp=1666200087~hmac=8082a82692f2d89ff8946d89b0914a0cc798ac1a049d8e6558df6792cd6a77e5" alt="sign in" className="w-full rounded-2" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
                     <form>

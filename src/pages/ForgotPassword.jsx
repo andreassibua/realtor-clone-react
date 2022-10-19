@@ -13,7 +13,7 @@ const ForgotPassword = () => {
             <h1 className="text-3xl text-center mt-6 font-bold">Forgot Password</h1>
             <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
                 <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
-                    <img src="https://www.go.ooo/img/bg-img/Login.jpg" alt="sign in" className="w-full rounded-2" />
+                    <img src="https://img.freepik.com/free-vector/forgot-password-concept-illustration_114360-1123.jpg?w=826&t=st=1666199423~exp=1666200023~hmac=4eca0e42a5002fe4e13c0390a6f700879f399678117e140a54dc3ab0fb6ae66d" alt="sign in" className="w-full rounded-2" />
                 </div>
                 <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
                     <form>
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
                             </p>
                             <p>
                                 <Link to="/sign-in" className='text-blue-400 hover:text-blue-500 transition duration-200 ease-in-out'>
-                                    Sign in instead?
+                                    Sign in instead
                                 </Link>
                             </p>
                         </div>
